@@ -58,6 +58,7 @@ class User extends Authenticatable implements Wallet
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'type' => UserType::class,
+        'status' => 'integer',
     ];
 
     /**
