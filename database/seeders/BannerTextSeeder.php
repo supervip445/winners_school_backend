@@ -23,7 +23,7 @@ class BannerTextSeeder extends Seeder
 
         $bannerTexts = [
             [
-                'text' => 'Welcome to မဟာဝိဇိတာရာမတိုက် Dhamma Center Monastery - A place of peace, wisdom, and compassion',
+                'text' => 'Welcome to ThetThetWinnerSchool Dhamma Center Monastery - A place of peace, wisdom, and compassion',
                 'is_active' => true,
             ],
             [

@@ -13,7 +13,7 @@ class MonasterySeeder extends Seeder
     public function run(): void
     {
         $monasteryDataJson = '{
-          "title": "ချမ်းမြသာယာရပ်ကွက် မဟာဝိဇိတာရာမတိုက် အတွင်း ကျောင်းအမည် စာရင်းများ",
+          "title": "ချမ်းမြသာယာရပ်ကွက် ThetThetWinnerSchool အတွင်း ကျောင်းအမည် စာရင်းများ",
           "subtitle": "စီစစ်ပြီး ကျောင်းစာရင်း ၂-၈-၂၀၂၀",
           "monasteries": [
             {"id": 1, "name": "ကနန်းကျောင်း", "monks": 0, "novices": 0, "total": 0},

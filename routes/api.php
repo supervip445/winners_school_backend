@@ -22,6 +22,7 @@ use App\Http\Controllers\Public\LikeController;
 use App\Http\Controllers\Public\CommentController;
 use App\Http\Controllers\Public\PublicBannerController;
 use App\Http\Controllers\Public\PublicAuthController;
+use App\Http\Controllers\Public\PublicTextBookController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BannerTextController;
 use App\Http\Controllers\Admin\AcademicYearController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ViewController;
 use App\Http\Controllers\Admin\AdminChatController;
 use App\Http\Controllers\Api\V1\Chat\AdminToUserChatController;
+use App\Http\Controllers\Admin\TextBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +90,10 @@ Route::prefix('public')->group(function () {
     // Lessons
     Route::get('/lessons', [PublicLessonController::class, 'index']);
     Route::get('/lessons/{id}', [PublicLessonController::class, 'show']);
+
+    // Text Books
+    Route::get('/text-books', [PublicTextBookController::class, 'index']);
+    Route::get('/text-books/{id}', [PublicTextBookController::class, 'show']);
     
     // Public User Authentication
     Route::post('/register', [PublicAuthController::class, 'register']);
@@ -160,6 +166,9 @@ Route::prefix('admin')->group(function () {
         
         // Lessons
         Route::apiResource('lessons', LessonController::class);
+
+        // Text Books
+        Route::apiResource('text-books', TextBookController::class);
         
         // Users (for teachers dropdown)
         Route::get('/users', [UserController::class, 'index']);
