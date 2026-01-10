@@ -20,23 +20,31 @@ class ClassController extends Controller
     // }
 
     public function index()
-{
-    $classes = SchoolClass::with(['academicYear', 'classTeacher', 'creator'])
-        ->latest()
-        ->paginate(10);
+    {
+        $query = SchoolClass::with(['academicYear', 'classTeacher', 'creator'])->latest();
 
-    return response()->json([
-        'success' => true,
-        'data' => $classes->items(),
-        'pagination' => [
-            'current_page' => $classes->currentPage(),
-            'per_page' => $classes->perPage(),
-            'total' => $classes->total(),
-            'last_page' => $classes->lastPage(),
-            'has_more_pages' => $classes->hasMorePages(),
-        ],
-    ]);
-}
+        // If clients request all classes (e.g., dropdowns), skip pagination
+        if (request()->boolean('all')) {
+            return response()->json([
+                'success' => true,
+                'data' => $query->get(),
+            ]);
+        }
+
+        $classes = $query->paginate(10);
+
+        return response()->json([
+            'success' => true,
+            'data' => $classes->items(),
+            'pagination' => [
+                'current_page' => $classes->currentPage(),
+                'per_page' => $classes->perPage(),
+                'total' => $classes->total(),
+                'last_page' => $classes->lastPage(),
+                'has_more_pages' => $classes->hasMorePages(),
+            ],
+        ]);
+    }
 
 
     /**

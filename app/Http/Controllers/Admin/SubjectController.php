@@ -19,23 +19,31 @@ class SubjectController extends Controller
     // }
 
     public function index()
-{
-    $subjects = Subject::with('creator')
-        ->latest()
-        ->paginate(10);
+    {
+        $query = Subject::with('creator')->latest();
 
-    return response()->json([
-        'success' => true,
-        'data' => $subjects->items(),
-        'pagination' => [
-            'current_page' => $subjects->currentPage(),
-            'per_page' => $subjects->perPage(),
-            'total' => $subjects->total(),
-            'last_page' => $subjects->lastPage(),
-            'has_more_pages' => $subjects->hasMorePages(),
-        ],
-    ]);
-}
+        // Allow fetching all for dropdowns
+        if (request()->boolean('all')) {
+            return response()->json([
+                'success' => true,
+                'data' => $query->get(),
+            ]);
+        }
+
+        $subjects = $query->paginate(10);
+
+        return response()->json([
+            'success' => true,
+            'data' => $subjects->items(),
+            'pagination' => [
+                'current_page' => $subjects->currentPage(),
+                'per_page' => $subjects->perPage(),
+                'total' => $subjects->total(),
+                'last_page' => $subjects->lastPage(),
+                'has_more_pages' => $subjects->hasMorePages(),
+            ],
+        ]);
+    }
 
 
     /**
