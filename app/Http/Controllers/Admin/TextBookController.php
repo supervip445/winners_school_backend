@@ -45,7 +45,7 @@ class TextBookController extends Controller
             'teacher_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'pdf_file' => 'required|file|mimes:pdf|max:20480', // 20MB
+            'pdf_file' => 'required|file|mimes:pdf|max:204800', // 200MB
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120', // 5MB
         ]);
 
@@ -90,7 +90,7 @@ class TextBookController extends Controller
             'teacher_id' => 'required|exists:users,id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:204800',
             'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
         ]);
 
