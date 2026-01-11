@@ -14,7 +14,7 @@ class LikeController extends Controller
     public function toggle(Request $request)
     {
         $validated = $request->validate([
-            'likeable_type' => 'required|string|in:App\Models\Post,App\Models\Dhamma',
+            'likeable_type' => 'required|string|in:App\Models\Post,App\Models\Dhamma,App\Models\Lesson,App\Models\TextBook',
             'likeable_id' => 'required|integer',
             'type' => 'required|in:like,dislike',
         ]);
@@ -68,7 +68,7 @@ class LikeController extends Controller
     public function counts(Request $request)
     {
         $validated = $request->validate([
-            'likeable_type' => 'required|string|in:App\Models\Post,App\Models\Dhamma',
+            'likeable_type' => 'required|string|in:App\Models\Post,App\Models\Dhamma,App\Models\Lesson,App\Models\TextBook',
             'likeable_id' => 'required|integer',
         ]);
 

@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\ViewController;
 use App\Http\Controllers\Admin\AdminChatController;
 use App\Http\Controllers\Api\V1\Chat\AdminToUserChatController;
 use App\Http\Controllers\Admin\TextBookController;
+use App\Http\Controllers\Admin\DictionaryApiController;
+use App\Http\Controllers\Public\PublicDictionaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +96,10 @@ Route::prefix('public')->group(function () {
     // Text Books
     Route::get('/text-books', [PublicTextBookController::class, 'index']);
     Route::get('/text-books/{id}', [PublicTextBookController::class, 'show']);
+
+    // Dictionary
+    Route::get('/dictionary-entries', [PublicDictionaryController::class, 'index']);
+    Route::get('/dictionary-entries/{dictionary_entry}', [PublicDictionaryController::class, 'show']);
     
     // Public User Authentication
     Route::post('/register', [PublicAuthController::class, 'register']);
@@ -169,6 +175,9 @@ Route::prefix('admin')->group(function () {
 
         // Text Books
         Route::apiResource('text-books', TextBookController::class);
+
+        // Dictionary Entries
+        Route::apiResource('dictionary-entries', DictionaryApiController::class);
         
         // Users (for teachers dropdown)
         Route::get('/users', [UserController::class, 'index']);
