@@ -98,6 +98,8 @@ Route::prefix('public')->group(function () {
     Route::get('/text-books', [PublicTextBookController::class, 'index']);
     Route::get('/text-books/{id}', [PublicTextBookController::class, 'show']);
     Route::get('/text-books/pdf-proxy', [PdfProxyController::class, 'show']);
+    // General PDF proxy
+    Route::get('/pdf-proxy', [PdfProxyController::class, 'show']);
 
     // Dictionary
     Route::get('/dictionary-entries', [PublicDictionaryController::class, 'index']);

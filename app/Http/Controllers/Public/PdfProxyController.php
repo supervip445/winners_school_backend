@@ -17,7 +17,8 @@ class PdfProxyController extends Controller
         }
 
         // Basic allowlist: only proxy PDF files
-        if (!str_ends_with(strtolower(parse_url($url, PHP_URL_PATH) ?? ''), '.pdf')) {
+        $path = parse_url($url, PHP_URL_PATH) ?? '';
+        if (!str_ends_with(strtolower($path), '.pdf')) {
             return response()->json(['message' => 'Only PDF files are allowed'], 400);
         }
 
