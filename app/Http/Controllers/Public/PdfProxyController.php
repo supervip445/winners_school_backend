@@ -23,19 +23,23 @@ class PdfProxyController extends Controller
         }
 
         try {
-            $response = Http::withOptions(['stream' => true])->get($url);
+            // Fetch full body to avoid zero-byte streams in some hosts
+            $response = Http::withHeaders(['Accept' => 'application/pdf'])->get($url);
             if (!$response->successful()) {
                 return response()->json(['message' => 'Failed to fetch file'], $response->status());
             }
 
-            $contentType = $response->header('Content-Type', 'application/pdf');
+            $body = $response->body();
+            if (empty($body)) {
+                return response()->json(['message' => 'Empty PDF content'], 502);
+            }
 
-            return response()->stream(function () use ($response) {
-                foreach ($response->toPsrResponse()->getBody() as $chunk) {
-                    echo $chunk;
-                }
-            }, 200, [
+            $contentType = $response->header('Content-Type', 'application/pdf');
+            $length = strlen($body);
+
+            return response($body, 200, [
                 'Content-Type' => $contentType,
+                'Content-Length' => $length,
                 'Access-Control-Allow-Origin' => '*',
                 'Access-Control-Allow-Methods' => 'GET, OPTIONS',
                 'Access-Control-Allow-Headers' => 'Range',
