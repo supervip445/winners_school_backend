@@ -36,7 +36,10 @@ class PdfProxyController extends Controller
             }, 200, [
                 'Content-Type' => $contentType,
                 'Access-Control-Allow-Origin' => '*',
-                'Access-Control-Expose-Headers' => 'Content-Type,Content-Length',
+                'Access-Control-Allow-Methods' => 'GET, OPTIONS',
+                'Access-Control-Allow-Headers' => 'Range',
+                'Access-Control-Expose-Headers' => 'Content-Type,Content-Length,Accept-Ranges,Content-Range',
+                'Accept-Ranges' => 'bytes',
             ]);
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Proxy error'], 500);
