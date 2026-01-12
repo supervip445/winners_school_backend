@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\V1\Chat\AdminToUserChatController;
 use App\Http\Controllers\Admin\TextBookController;
 use App\Http\Controllers\Admin\DictionaryApiController;
 use App\Http\Controllers\Public\PublicDictionaryController;
+use App\Http\Controllers\Public\PdfProxyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,7 @@ Route::prefix('public')->group(function () {
     // Text Books
     Route::get('/text-books', [PublicTextBookController::class, 'index']);
     Route::get('/text-books/{id}', [PublicTextBookController::class, 'show']);
+    Route::get('/text-books/pdf-proxy', [PdfProxyController::class, 'show']);
 
     // Dictionary
     Route::get('/dictionary-entries', [PublicDictionaryController::class, 'index']);
